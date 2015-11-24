@@ -1,0 +1,51 @@
+cluster:
+  name: ${CLUSTER_NAME}
+
+node:
+  data: ${NODE_DATA}
+  max_local_storage_nodes: 1
+
+network:
+  host: _non_loopback:ipv4_
+
+cloud:
+  aws:
+    access_key: ${AWS_ACCESS_KEY}
+    secret_key: ${AWS_SECRET_KEY}
+    region: ${AWS_REGION}
+
+discovery:
+  type: ec2
+  ec2:
+    any_group: false
+    groups: ${SECURITY_GROUP}
+  zen:
+    minimum_master_nodes: ${DISCOVERY_ZEN_MINIMUM_MASTER_NODES}
+    ping.timeout: 30s
+
+bootstrap:
+  mlockall: true
+
+http:
+  enabled: ${HTTP_ENABLED}
+
+gateway:
+  type: local
+  recover_after_nodes: ${GATEWAY_RECOVER_AFTER_NODES}
+  recover_after_time: 30s
+  expected_nodes: ${GATEWAY_EXPECTED_NODES}
+
+
+indices:
+  store:
+    throttle:
+      type: merge
+      max_bytes_per_sec: 10mb
+  cache:
+    filter:
+      size: 15%
+      expire: 15m
+  fielddata:
+    cache:
+      size: 5%
+      expire: 5m
