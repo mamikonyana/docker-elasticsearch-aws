@@ -30,7 +30,6 @@ http:
   enabled: ${HTTP_ENABLED}
 
 gateway:
-  type: local
   recover_after_nodes: ${GATEWAY_RECOVER_AFTER_NODES}
   recover_after_time: 30s
   expected_nodes: ${GATEWAY_EXPECTED_NODES}
